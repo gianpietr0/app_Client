@@ -26,25 +26,18 @@ public class loginController {
 
 
     public void loginAction(ActionEvent actionEvent) throws IOException, InterruptedException {
-        try {
-            if (Client.getIstance() == null) {
-                lblClient.setTextFill(Color.RED);
-                lblClient.setText("Connection failed!");
-            } else {
-                lblClient.setTextFill(Color.GREEN);
-                lblClient.setText("Client connected!");
-                root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-                stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        } catch (RuntimeException err) {
-            lblClient.setTextFill(Color.RED);
-            lblClient.setText("Client not connected!");
-        } catch (Exception exc) {
+        Client.connectClient();
+        if (Client.getIstance() == null) {
             lblClient.setTextFill(Color.RED);
             lblClient.setText("Connection failed!");
+        } else {
+            lblClient.setTextFill(Color.GREEN);
+            lblClient.setText("Client connected!");
+            root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+            stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
     }
 }
