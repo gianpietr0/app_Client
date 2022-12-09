@@ -48,13 +48,13 @@ public class Client {
     /**
      * Inizializzazione dell'unica istanza possibile di Client.
      */
-    static {
+    public static void connectClient() {
         try {
             client = new Client("127.0.0.1", 2025);
         } catch (IOException e) {
             client = null;
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            client = null;
         }
     }
 
